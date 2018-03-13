@@ -5,3 +5,4 @@ now) check the API of popular exchanges to see if a new coin has been added.
 
 Current support:
 - Bittrex
+- Binance
