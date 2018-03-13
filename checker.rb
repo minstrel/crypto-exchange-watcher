@@ -34,7 +34,7 @@ bittrex = Thread.new do
       bittrex_diff = bittrex_new - bittrex_old
       if ! bittrex_diff.empty?
         bittrex_diff.each do |diff|
-          puts "Bittrex may have added #{diff['MarketName']}, #{diff['BaseCurrencyLong']} => #{diff['MarketCurrencyLong']}"
+          puts "!!!! Bittrex may have added or updated #{diff['MarketName']}, #{diff['BaseCurrencyLong']} => #{diff['MarketCurrencyLong']}"
         end
       end
       bittrex_old = bittrex_new
@@ -77,7 +77,7 @@ binance = Thread.new do
       binance_diff = binance_new - binance_old
       if ! binance_diff.empty?
         binance_diff.each do |diff|
-          puts "Binance may have added #{diff['symbol']}, #{diff['baseAsset']} => #{diff['quoteAsset']}"
+          puts "!!!! Binance may have added or updated #{diff['symbol']}, #{diff['baseAsset']} => #{diff['quoteAsset']}"
         end
       end
       binance_old = binance_new
