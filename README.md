@@ -7,3 +7,4 @@ or an existing coin has been updated.
 Current support:
 - Bittrex
 - Binance
+- Kucoin
