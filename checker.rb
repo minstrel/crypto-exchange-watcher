@@ -24,16 +24,19 @@ bittrex_diff = []
 
 puts "Bittrex init - got #{bittrex_old.length} results"
 
-loop do
-  bittrex_new = get_bittrex
-  puts "Bittrex refresh #{bittrex_old.length} old vs #{bittrex_new.length} new. #{Time.now}"
-  bittrex_diff = bittrex_new - bittrex_old
-  if ! bittrex_diff.empty?
-    bittrex_diff.each do |diff|
-      puts "Bittrex may have added #{diff['MarketName']}, #{diff['BaseCurrencyLong']} => #{diff['MarketCurrencyLong']}"
+bittrex = Thread.new do
+  loop do
+    bittrex_new = get_bittrex
+    puts "Bittrex refresh #{bittrex_old.length} old vs #{bittrex_new.length} new. #{Time.now}"
+    bittrex_diff = bittrex_new - bittrex_old
+    if ! bittrex_diff.empty?
+      bittrex_diff.each do |diff|
+        puts "Bittrex may have added #{diff['MarketName']}, #{diff['BaseCurrencyLong']} => #{diff['MarketCurrencyLong']}"
+      end
     end
+    bittrex_old = bittrex_new
+    sleep(120)
   end
-  bittrex_old = bittrex_new
-  sleep(120)
 end
 
+bittrex.join
