@@ -15,6 +15,7 @@ Current support:
 - Binance
 - Kucoin
 - Huobi
+- Bitfinex
 
 ## Usage:
 
