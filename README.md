@@ -15,3 +15,9 @@ Current support:
 - Binance
 - Kucoin
 - Huobi
+
+## Usage:
+
+With ruby installed (no gems needed), clone the repo and run checker.rb.
+
+Ctrl-C to close.
