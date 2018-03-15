@@ -9,7 +9,8 @@ exchanges = ['binance',
              'bittrex',
              'huobi',
              'kucoin',
-             'bitfinex']
+             'bitfinex',
+             'okex']
 
 threads = []
 

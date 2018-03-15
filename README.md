@@ -16,6 +16,7 @@ Current support:
 - Kucoin
 - Huobi
 - Bitfinex
+- Okex
 
 ## Usage:
 
