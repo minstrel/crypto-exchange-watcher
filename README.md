@@ -8,3 +8,4 @@ Current support:
 - Bittrex
 - Binance
 - Kucoin
+- Huobi

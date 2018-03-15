@@ -17,7 +17,12 @@ def get_bittrex
   bittrex_req = Net::HTTP::Get.new(bittrex_uri.path)
   bittrex_req.content_type = 'application/json'
   bittrex_res = bittrex_http.request(bittrex_req)
-  JSON.parse(bittrex_res.body)['result']
+  bittrex_data = JSON.parse(bittrex_res.body)['result']
+
+  bittrex_data.collect! { |d| {marketname: d['MarketName'],
+                               marketcurrencylong: d['MarketCurrencyLong'],
+                               basecurrencylong: d['BaseCurrencyLong']} }
+  bittrex_data
 end
 
 bittrex_old = get_bittrex
@@ -34,7 +39,7 @@ bittrex = Thread.new do
       bittrex_diff = bittrex_new - bittrex_old
       if ! bittrex_diff.empty?
         bittrex_diff.each do |diff|
-          puts "    !!!! Bittrex may have added or updated #{diff['MarketName']}, #{diff['BaseCurrencyLong']} => #{diff['MarketCurrencyLong']}"
+          puts "    !!!! Bittrex may have added or updated #{diff[:marketname]}, #{diff[:basecurrencylong]} => #{diff[:marketcurrencylong]}"
         end
       end
       bittrex_old = bittrex_new
@@ -60,7 +65,12 @@ def get_binance
   binance_req = Net::HTTP::Get.new(binance_uri.path)
   binance_req.content_type = 'application/json'
   binance_res = binance_http.request(binance_req)
-  JSON.parse(binance_res.body)['symbols']
+  binance_data = JSON.parse(binance_res.body)['symbols']
+
+  binance_data.collect! { |d| {symbol: d['symbol'],
+                               base_asset: d['baseAsset'],
+                               quote_asset: d['quoteAsset']} }
+  binance_data
 end
 
 binance_old = get_binance
@@ -77,7 +87,7 @@ binance = Thread.new do
       binance_diff = binance_new - binance_old
       if ! binance_diff.empty?
         binance_diff.each do |diff|
-          puts "    !!!! Binance may have added or updated #{diff['symbol']}, #{diff['baseAsset']} => #{diff['quoteAsset']}"
+          puts "    !!!! Binance may have added or updated #{diff[:symbol]}, #{diff[:base_asset]} => #{diff[:quote_asset]}"
         end
       end
       binance_old = binance_new
