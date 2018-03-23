@@ -18,6 +18,7 @@ exchanges.each do |ex|
   threads << Thread.new do
     require_relative "lib/#{ex}"
   end
+  sleep(2)
 end
 
 threads.each { |t| t.join }
